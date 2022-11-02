@@ -51,7 +51,12 @@ Original file is located at
 # 학습시에 total_loss = net.alpha * loss + (1-net.alpha)*loss2 처럼 사용한다
 # 이 때는 모델 파라미터에 포함되기 때문에 따로 gradient 갱신해줄 필요 없다
 
-
+# alpha가 1보다 커지면?
+#  1) gradient clipping (torch.clip == torch.clamp) ***
+        # self.alpha = torch.clamp(torch.nn.Parameter(torch.tensor([0.5])), min=0, max=1)
+#  2) log 씌우기
+        # total_loss = torch.log(net.alpha) * loss + (1-torch.log(net.alpha))*loss2 
+        # 이 때 값이 0~1 사이가 나오면 매우 작아질 문제점
 
 
 
